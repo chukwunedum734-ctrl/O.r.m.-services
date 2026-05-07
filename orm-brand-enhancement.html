@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O.R.M - Business Brand Enhancement Service</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cinzel & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6, .heading {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Brand Colors */
+        :root {
+            --primary-gold: #D4AF37;
+            --accent-teal: #2DAAA3;
+            --dark-navy: #0F1B2E;
+            --pure-black: #0a0a0a;
+            --white: #f8f8f8;
+            --accent-coral: #E07856;
+        }
+        
+        body {
+            background-color: var(--pure-black);
+            color: var(--white);
+        }
+        
+        /* Hero Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in {
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .hero-title {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-subtitle {
+            animation: fadeInUp 1.1s ease-out;
+        }
+        
+        .hero-cta {
+            animation: fadeInUp 1.3s ease-out;
+        }
+        
+        /* Premium Button Styles */
+        .btn-primary {
+            background-color: var(--primary-gold);
+            color: var(--pure-black);
+            border: 2px solid var(--primary-gold);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        
+        .btn-secondary {
+            background-color: var(--accent-teal);
+            color: var(--white);
+            border: 2px solid var(--accent-teal);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: var(--accent-teal);
+            box-shadow: 0 0 20px rgba(45, 170, 163, 0.5);
+        }
+        
+        /* Accent Lines */
+        .accent-line {
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-gold);
+            margin: 0 auto;
+        }
+        
+        .accent-line-teal {
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-teal);
+            margin: 0 auto;
+        }
+        
+        /* Service Cards */
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(45, 170, 163, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--primary-gold);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+        }
+        
+        /* Gradient Text */
+        .text-gradient-gold {
+            background: linear-gradient(135deg, var(--primary-gold), rgba(212, 175, 55, 0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-teal {
+            background: linear-gradient(135deg, var(--accent-teal), rgba(45, 170, 163, 0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Contact Links */
+        .contact-link {
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        
+        .contact-link:hover {
+            border-bottom-color: var(--primary-gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* Scroll Fade */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+        }
+        
+        /* Logo Container */
+        .logo-mark {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-teal), var(--primary-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 28px;
+            letter-spacing: -2px;
+        }
+        
+        /* Stats Counter */
+        .stat-box {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    
+    <!-- HERO SECTION -->
+    <section class="min-h-screen flex items-center justify-center px-6 md:px-12 py-20 relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-32 right-20 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
+            <div class="absolute bottom-20 left-20 w-96 h-96 bg-yellow-600 rounded-full mix-blend-multiply filter blur-3xl"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div>
+                    <div class="logo-mark mb-8 w-fit">
+                        O.R.M
+                    </div>
+                    
+                    <h1 class="hero-title text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight">
+                        What We Do <br><span class="text-gradient-gold">Isn't the Norm</span>
+                    </h1>
+                    
+                    <div class="accent-line mb-8"></div>
+                    
+                    <p class="hero-subtitle text-lg md:text-xl font-light leading-relaxed mb-8 text-gray-300">
+                        Because it's from O.R.M. We transform businesses through strategic brand enhancement and growth-driven digital presence.
+                    </p>
+                    
+                    <button class="hero-cta btn-primary px-10 py-4 rounded-sm text-lg font-semibold hover:scale-105 transform transition-all duration-300 inline-block">
+                        Enhance Your Brand
+                    </button>
+                </div>
+                
+                <!-- Right Visual -->
+                <div class="relative hidden md:block">
+                    <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-cyan-500 via-teal-400 to-transparent rounded-full opacity-20 blur-3xl"></div>
+                    <div class="absolute bottom-0 left-20 w-72 h-72 bg-gradient-to-tl from-yellow-500 to-transparent rounded-full opacity-20 blur-3xl"></div>
+                    
+                    <div class="relative z-10 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg border border-gray-800 backdrop-blur">
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-3 h-3 bg-cyan-400 rounded-full mt-2"></div>
+                                <div>
+                                    <h3 class="font-bold text-sm">Strategic Positioning</h3>
+                                    <p class="text-xs text-gray-400">Market clarity & brand voice</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full mt-2"></div>
+                                <div>
+                                    <h3 class="font-bold text-sm">Visual Excellence</h3>
+                                    <p class="text-xs text-gray-400">Design systems & identity</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-3 h-3 bg-pink-500 rounded-full mt-2"></div>
+                                <div>
+                                    <h3 class="font-bold text-sm">Growth Acceleration</h3>
+                                    <p class="text-xs text-gray-400">Content & digital strategy</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-3 h-3 bg-cyan-400 rounded-full mt-2"></div>
+                                <div>
+                                    <h3 class="font-bold text-sm">Performance Tracking</h3>
+                                    <p class="text-xs text-gray-400">Data-driven optimization</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SERVICES SECTION -->
+    <section class="py-32 px-6 md:px-12 bg-gradient-to-b from-black via-gray-950 to-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Enhancement Services</h2>
+                <div class="accent-line mb-8"></div>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Complete brand transformation from strategy to execution. Every element designed for measurable growth.</p>
+            </div>
+            
+            <!-- Service 1 -->
+            <div class="service-card p-8 md:p-12 rounded-xl mb-8 scroll-fade">
+                <div class="flex items-start mb-6">
+                    <div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-lg flex items-center justify-center mr-6 flex-shrink-0">
+                        <span class="text-white font-bold text-2xl">01</span>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold">Strategic Brand Positioning</h3>
+                        <p class="text-sm text-gray-400 mt-1">Foundation for Premium Growth</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                    We define your unique market position, clarify your brand voice, and architect the narrative that sets you apart. Every strategic decision is rooted in deep market research and competitive intelligence. Your brand becomes unmistakable and unforgettable.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-cyan-400">Market Analysis</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-cyan-400">Brand Strategy</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-cyan-400">Positioning</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-cyan-400">Voice & Messaging</span>
+                </div>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="service-card p-8 md:p-12 rounded-xl mb-8 scroll-fade">
+                <div class="flex items-start mb-6">
+                    <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-lg flex items-center justify-center mr-6 flex-shrink-0">
+                        <span class="text-white font-bold text-2xl">02</span>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold">Visual Identity & Design Systems</h3>
+                        <p class="text-sm text-gray-400 mt-1">Design Excellence at Every Touchpoint</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                    From logo refinement to complete design systems, we create cohesive visual languages that communicate authority and innovation. Every color, typeface, and graphic element is intentional. Your brand becomes instantly recognizable across all platforms and mediums.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-yellow-400">Logo & Identity</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-yellow-400">Design Systems</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-yellow-400">Brand Guidelines</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-yellow-400">Website Design</span>
+                </div>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="service-card p-8 md:p-12 rounded-xl scroll-fade">
+                <div class="flex items-start mb-6">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-lg flex items-center justify-center mr-6 flex-shrink-0">
+                        <span class="text-white font-bold text-2xl">03</span>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold">Digital Growth & Presence Stewardship</h3>
+                        <p class="text-sm text-gray-400 mt-1">Sustainable Growth Through Strategic Execution</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                    Strategic content creation, social media management, and digital marketing that drives real business results. We leverage data insights to optimize every campaign, channel, and customer touchpoint. Growth becomes predictable and scalable.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-pink-400">Content Strategy</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-pink-400">Social Management</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-pink-400">Growth Marketing</span>
+                    <span class="text-xs uppercase tracking-wider px-4 py-2 bg-gray-900 rounded-full text-pink-400">Analytics & Optimization</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- DIVIDER -->
+    <div class="px-6 md:px-12 py-12">
+        <div class="max-w-6xl mx-auto divider"></div>
+    </div>
+    
+    <!-- STATS SECTION -->
+    <section class="py-24 px-6 md:px-12 bg-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-20">
+                <div class="stat-box">
+                    <div class="stat-number">300+</div>
+                    <p class="text-gray-400 mt-2">Brands Transformed</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">95%</div>
+                    <p class="text-gray-400 mt-2">Client Retention Rate</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3x</div>
+                    <p class="text-gray-400 mt-2">Avg. Growth Impact</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50M+</div>
+                    <p class="text-gray-400 mt-2">Content Impressions</p>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-12 rounded-xl border border-gray-700">
+                <h3 class="text-2xl font-bold mb-4 text-gradient-gold">Why Choose O.R.M</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <p class="font-semibold mb-2">Holistic Approach</p>
+                        <p class="text-sm text-gray-400">Brand strategy, design, and growth working in perfect harmony. No siloed thinking.</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">Data-Driven</p>
+                        <p class="text-sm text-gray-400">Every decision backed by analytics, market research, and proven methodology.</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">Results-Focused</p>
+                        <p class="text-sm text-gray-400">We measure success by your business growth, engagement, and market presence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA SECTION -->
+    <section class="py-24 px-6 md:px-12 bg-gradient-to-b from-gray-950 to-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready for Transformation?</h2>
+            <div class="accent-line mb-8"></div>
+            <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
+                Join 300+ brands that chose O.R.M to elevate their presence and accelerate their growth.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button class="btn-primary px-12 py-4 rounded-sm text-lg font-semibold hover:scale-105 transform transition-all duration-300">
+                    Start Your Journey
+                </button>
+                <button class="btn-secondary px-12 py-4 rounded-sm text-lg font-semibold hover:scale-105 transform transition-all duration-300">
+                    View Case Studies
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CONTACT SECTION -->
+    <section class="py-24 px-6 md:px-12 bg-black">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Talk Growth</h2>
+                <div class="accent-line-teal mb-8"></div>
+                <p class="text-gray-400 text-lg">Get in touch with our brand enhancement specialists</p>
+            </div>
+            
+            <!-- Contact Grid -->
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <!-- WhatsApp -->
+                <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <span class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></span>
+                        WhatsApp Direct
+                    </h3>
+                    <div class="space-y-4">
+                        <p class="text-gray-300">
+                            <a href="https://wa.me/234901521062" class="contact-link text-lg font-semibold">+234 901 521 0626</a>
+                        </p>
+                        <p class="text-gray-300">
+                            <a href="https://wa.me/234911936515" class="contact-link text-lg font-semibold">+234 911 936 5155</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Email & Socials -->
+                <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <span class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></span>
+                        Digital Channels
+                    </h3>
+                    <div class="space-y-4">
+                        <p class="text-gray-300">
+                            <a href="mailto:orm6888@gmail.com" class="contact-link text-lg font-semibold">orm6888@gmail.com</a>
+                        </p>
+                        <p class="text-gray-300">
+                            <a href="https://www.tiktok.com/@orm1.000" target="_blank" rel="noopener noreferrer" class="contact-link text-lg font-semibold">TikTok Portfolio: @orm1.000</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main CTA -->
+            <div class="text-center">
+                <a href="https://wa.me/234901521062" class="btn-primary inline-block px-14 py-4 rounded-sm text-lg font-semibold hover:scale-105 transform transition-all duration-300">
+                    Schedule a Strategy Call
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800 py-16 px-6 md:px-12 bg-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="logo-mark mb-4 w-fit">
+                        O.R.M
+                    </div>
+                    <p class="text-gray-500 text-sm">What we do isn't the norm, because it's from O.R.M.</p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-gray-300">Services</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li>Brand Positioning</li>
+                        <li>Visual Identity</li>
+                        <li>Digital Growth</li>
+                        <li>Strategy & Consulting</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-gray-300">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li>About O.R.M</li>
+                        <li>Case Studies</li>
+                        <li>Methodology</li>
+                        <li>Blog</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider mb-4 text-gray-300">Connect</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://wa.me/234901521062" class="contact-link">WhatsApp</a></li>
+                        <li><a href="mailto:orm6888@gmail.com" class="contact-link">Email</a></li>
+                        <li><a href="https://www.tiktok.com/@orm1.000" target="_blank" rel="noopener noreferrer" class="contact-link">TikTok</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="divider my-8"></div>
+            
+            <div class="text-center text-sm text-gray-600">
+                <p>&copy; 2025 O.R.M Studio. All rights reserved. | Transforming brands globally</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- SCROLL ANIMATION SCRIPT -->
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.scroll-fade').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Smooth button interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.getAttribute('href') || this.querySelector('a')) {
+                    return;
+                }
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.6)';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+            });
+        });
+    </script>
+
+</body>
+</html>
